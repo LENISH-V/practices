@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="main_div">
+     <div class="music_container">
+            <h2 id="title">stay</h2>
+            <h3 id="artist">jb</h3> 
+            <div class="img_container">
+               <img src="images/stay.jpg" class="img">
+            </div> 
+            <audio src="audio/stay.mp3"></audio>
+                <div class="music_controls">
+                    <i class="fas fa-backward" id="prev" title="previous song"></i>
+                    <i class="fas fa-play main_button" id="play" title="play"></i>
+                    <i class="fas fa-forward" id="next" title="next song"></i>
+                </div>
+     </div>
+    </div>
+    <script>
+        var music = document.querySelector("audio")
+          var img = document.querySelector('img');
+          var play = document.getElementById("play");
+          var artist = document.getElementById("artist");
+          var title = document.getElementById("title");
+          var prev = document.getElementById("prev");
+          var next = document.getElementById("next");
+      
+          const songs = [{
+              name: "stay",
+              title: "stay",
+              artist: "jb",
+          },
+          {
+              name: "fly",
+              title: "flyaway",
+              artist: "vv",
+          },
+          {
+              name: "blinders",
+              title: "peaky blinder",
+              artist: "unknown",
+          }]
+      
+          let isplaying = true;
+      //for play
+              const playmusic = () =>{
+              isplaying = true;
+              music.play();
+              play.classList.replace('fa-play','fa-pause');
+              };
+      //for pause
+              const pausemusic =  () => {
+              isplaying = false;
+              music.pause();
+              play.classList.replace('fa-pause','fa-play');
+          };
+      
+          play.addEventListener('click', () => {
+              if(isplaying){
+                  pausemusic();
+              }
+              else{
+                  playmusic();
+              }
+          });
+          //change music data
+      
+           const loadsong = (songs) => {
+              title.textContent = songs.title;
+              artist.textContent = songs.artist;
+              music.src = "audio/" + songs.name + ".mp3";
+              img.src = "images/" + songs.name + ".jpg";
+          };
+          songIndex = 0;
+      
+          const nextsong = () => {
+              songIndex = (songIndex + 1) % songs.length;
+              loadsong(songs[songIndex]);
+              playmusic();
+          };
+          const prevsong = () => {
+              songIndex = (songIndex - 1 + songs.length) % songs.length;
+              loadsong(songs[songIndex]);
+              playmusic();
+          };
+      
+          next.addEventListener('click', nextsong);
+          prev.addEventListener('click', prevsong);
+      </script>
+
+</body>
+</html>
