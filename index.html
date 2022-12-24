@@ -52,13 +52,13 @@
           let isplaying = true;
       //for play
               const playmusic = () =>{
-              isplaying = false;
+              isplaying = true;
               music.play();
               play.classList.replace('fa-play','fa-pause');
               };
       //for pause
               const pausemusic =  () => {
-              isplaying = true;
+              isplaying = false;
               music.pause();
               play.classList.replace('fa-pause','fa-play');
           };
